@@ -1,12 +1,14 @@
 .login {
   height: 100vh;
-  background-color: rgb(255, 198, 190);
+  background-color: rgb(255, 190, 215);
   display: flex;
   align-items: center;
   justify-content: center;
 
   .card {
     width: 50%;
+    height: 75%;
+
     display: flex;
     background-color: white;
     border-radius: 10px;
@@ -15,8 +17,8 @@
 
     .left {
       flex: 1;
-      background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg")
+      background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(96, 24, 11, 0.5)),
+        url("https://images.pexels.com/photos/4011391/pexels-photo-4011391.jpeg?auto=compress&cs=tinysrgb&w=1600")
           center;
       background-size: cover;
       padding: 50px;
