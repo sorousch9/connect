@@ -5,21 +5,34 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
-import Logo from "../../assets/Logo.png";
+import LogoInWhite from "../../assets/Logo.png";
+import LogoInDark from "../../assets/LogoInDark.png";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/themeContext";
 const Navbar = () => {
+  const { toggle, darkMode } = useContext(DarkModeContext);
+  console.log(darkMode);
   return (
     <div className="navbar">
       <div className="left">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <img src={Logo} alt="logo" />
+        <Link to="/">
+          {darkMode ? (
+            <img src={LogoInDark} alt="logo" />
+          ) : (
+            <img src={LogoInWhite} alt="logo" />
+          )}
         </Link>
-        <MdOutlineDarkMode />
-
-        <BsSun />
-
+      </div>
+      <div className="center">
         <BsGrid />
+        {darkMode ? (
+          <BsSun onClick={toggle} />
+        ) : (
+          <MdOutlineDarkMode onClick={toggle} />
+        )}
+
         <div className="search">
           <IoSearchOutline />
           <input type="text" placeholder="Search..." />
