@@ -1,89 +1,65 @@
+@import "../../index.scss";
+
 .rightBar {
-  flex: 3;
-  position: sticky;
-  top: 70px;
-  height: calc(100vh - 70px);
-  overflow: scroll;
-  background-color: #f9f9f9;
+  @include appTheme($themes) {
+    flex: 3;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    background-color: themed("backgroundColor");
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
-  .container {
-    padding: 20px;
-
-    .item {
-      -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-      -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    .container {
       padding: 20px;
-      margin-bottom: 20px;
-      background-color: themed("bg");
 
-      span {
-        color: gray;
-      }
+      .item {
+        -webkit-box-shadow: themed("box-shadow");
+        -moz-box-shadow: themed("box-shadow");
+        box-shadow: themed("box-shadow");
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: themed("backgroundColor");
 
-      .user {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 20px 0px;
-        .userInfo {
+        span {
+          color: gray;
+        }
+
+        .user {
           display: flex;
           align-items: center;
-          gap: 20px;
-          position: relative;
-
-          img {
-            width: 40px;
-            height: 40px;
-            border-radius: 20%;
-            object-fit: cover;
-          }
-
-          .online {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: limegreen;
-            position: absolute;
-            top: 0;
-            left: 30px;
-          }
-
-          p {
-            width: 80%;
-          }
-
-          span {
-            font-weight: 500;
+          justify-content: space-between;
+          margin: 20px 0px;
+          .userInfo {
             display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 20%;
+              object-fit: cover;
+            }
+
+            p {
+              color: themed("textColorSoft");
+              width: 80%;
+            }
+
+            span {
+              font-weight: 500;
+              display: flex;
+              color: themed("textColor");
+            }
           }
-        }
-        .activityTime {
-          font-size: 12px;
-          color: #8a8a8a;
-        }
-        .buttons {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-
-          button {
-            border: none;
-            padding: 5px;
-            color: white;
-            cursor: pointer;
-
-            &:first-child {
-              background-color: #5271ff;
-            }
-
-            &:last-child {
-              background-color: #f0544f;
-            }
+          .activityTime {
+            font-size: 12px;
+            color: #8a8a8a;
           }
         }
       }

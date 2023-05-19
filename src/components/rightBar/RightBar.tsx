@@ -58,7 +58,7 @@ const RightBar = () => {
                 alt="Profile"
                 className="profileImage"
               />
-              <div className="onlineIndicator" />
+
               <span className="username">Ham Otto</span>
             </div>
           </div>
@@ -69,7 +69,6 @@ const RightBar = () => {
                 alt="Profile"
                 className="profileImage"
               />
-              <div className="onlineIndicator" />
               <span className="username">Sarah Fischer</span>
             </div>
           </div>
