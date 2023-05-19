@@ -1,12 +1,11 @@
 import "./Home.scss";
 
 const Home = () => {
-  return <div className="home">
-    <h1>home</h1>
-    <h1>home</h1>
-    <h1>home</h1>
-
-  </div>;
+  return (
+    <div className="home">
+      <p>home</p>
+    </div>
+  );
 };
 
 export default Home;

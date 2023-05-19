@@ -2,7 +2,9 @@
 
 .home {
   @include appTheme($themes) {
-    background-color: themed("backgroundColor");
+    background-color: themed("backgroundSoftColor");
     color: themed("textColor");
+    height: 100%;
   }
+
 }

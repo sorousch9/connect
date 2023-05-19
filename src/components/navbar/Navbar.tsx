@@ -13,7 +13,6 @@ import { useContext } from "react";
 import { DarkModeContext } from "../../context/themeContext";
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
-  console.log(darkMode);
   return (
     <div className="navbar">
       <div className="left">
