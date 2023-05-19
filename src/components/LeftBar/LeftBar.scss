@@ -1,61 +1,65 @@
+@import "../../index.scss";
 .leftBar {
-  background-color: #f9f9f9;
-  flex: 1.5;
-  position: sticky;
-  top: 70px;
-  height: calc(100vh - 70px);
-  overflow: scroll;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  .container {
-    padding: 20px;
-
-    hr {
-      margin: 20px 0px;
-      border: none;
-      height: 0.5px;
-      background-color: #cecece;
+  @include appTheme($themes) {
+    background-color: themed("backgroundColor");
+    flex: 1.5;
+    position: sticky;
+    top: 70px;
+    height: calc(100vh - 70px);
+    overflow: scroll;
+    color: themed("textColor");
+    &::-webkit-scrollbar {
+      display: none;
     }
 
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+    .container {
+      padding: 20px;
 
-      span {
-        font-size: 12px;
+      hr {
+        margin: 20px 0px;
+        border: none;
+        height: 0.5px;
+        background-color: themed("borderColor");
       }
 
-      .user {
+      .menu {
         display: flex;
-        align-items: center;
-        gap: 10px;
-
-        img {
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
+        flex-direction: column;
+        gap: 20px;
 
         span {
-          font-size: 14px;
-        }
-      }
-
-      .item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        img {
-          width: 30px;
+          font-size: 12px;
         }
 
-        span {
-          font-size: 14px;
+        .user {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+
+          span {
+            font-size: 14px;
+          }
+        }
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          img {
+            width: 30px;
+          }
+
+          span {
+            font-size: 14px;
+          }
         }
       }
     }
