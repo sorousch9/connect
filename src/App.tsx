@@ -1,25 +1,36 @@
-import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
+import { useContext } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  Navigate,
+} from "react-router-dom";
 import RightBar from "./components/rightBar/RightBar";
 import LeftBar from "./components/LeftBar/LeftBar";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
+import { DarkModeContext } from "./context/themeContext";
 
-const AppLayout = () => (
-  <div>
-    <Navbar />
-    <div style={{ display: "flex" }}>
-      <LeftBar />
-      <div style={{ flex: 6 }}>
-        <Outlet />
+const AppLayout = () => {
+  const { darkMode } = useContext(DarkModeContext);
+
+  return (
+    <div className={`theme-${darkMode ? "dark" : "light"}`}>
+      <Navbar />
+      <div style={{ display: "flex" }}>
+        <LeftBar />
+        <div style={{ flex: 8 }}>
+          <Outlet />
+        </div>
+        <RightBar />
       </div>
-      <RightBar />
     </div>
-  </div>
-);
+  );
+};
 
-const ProtectedRoute = ({ children }: { children: JSX.Element })  => {
+const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isLoggedIn = true;
 
   if (!isLoggedIn) {
@@ -57,7 +68,7 @@ const routes = [
 const router = createBrowserRouter(routes);
 
 const App = () => (
-  <div>
+  <div className="app">
     <RouterProvider router={router} />
   </div>
 );
