@@ -1,0 +1,8 @@
+@import "../../index.scss";
+
+.home {
+  @include appTheme($themes) {
+    background-color: themed("backgroundColor");
+    color: themed("textColor");
+  }
+}
