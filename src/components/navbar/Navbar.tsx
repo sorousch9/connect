@@ -11,8 +11,10 @@ import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { DarkModeContext } from "../../context/themeContext";
+import { AuthContext } from "../../context/authContext";
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
+  const { currentUser } = useContext(AuthContext);
   return (
     <div className="navbar">
       <div className="left">
@@ -42,11 +44,8 @@ const Navbar = () => {
         <AiOutlineMail />
         <IoIosNotificationsOutline />
         <div className="user">
-          <img
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            alt=""
-          />
-          <span>Patrick Müller</span>
+          <img src={currentUser?.profilePic} alt="" />
+          <span>{currentUser?.name}</span>
         </div>
       </div>
     </div>
