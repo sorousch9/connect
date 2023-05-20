@@ -21,14 +21,11 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // Retrieve the user from local storage, or provide a default value
-
   const storedUser = localStorage.getItem("user");
-  const initialUser: User | null = storedUser ? JSON.parse(storedUser) : null;
+  const parsedUser = storedUser ? JSON.parse(storedUser) : null;
+  const [currentUser, setCurrentUser] = useState<User>(parsedUser);
 
-  const [currentUser, setCurrentUser] = useState<User | null>(initialUser);
-
-  const login = (): void => {
-    // TO DO
+  const login = () => {
     setCurrentUser({
       id: 1,
       name: "Patrick Müller",
