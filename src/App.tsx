@@ -12,6 +12,7 @@ import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import { DarkModeContext } from "./context/themeContext";
+import { AuthContext } from "./context/authContext";
 
 const AppLayout = () => {
   const { darkMode } = useContext(DarkModeContext);
@@ -31,9 +32,9 @@ const AppLayout = () => {
 };
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
-  const isLoggedIn = true;
-
-  if (!isLoggedIn) {
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser);
+  if (!currentUser) {
     return <Navigate to="/login" />;
   }
 
