@@ -8,18 +8,19 @@ import Integrations from "../../assets/leftBar/Integrations.png";
 import workflow from "../../assets/leftBar/workflow.png";
 import Tutorials from "../../assets/leftBar/Tutorials.png";
 import Messages from "../../assets/leftBar/Messages.png";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const LeftBar = () => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div className="leftBar">
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
-            />
-            <span>Patrick Müller</span>
+            <img src={currentUser?.profilePic} alt="" />
+            <span>{currentUser?.name}</span>
           </div>
 
           <div className="item">
