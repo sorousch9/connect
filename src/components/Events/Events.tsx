@@ -1,5 +1,7 @@
 import { Col } from "antd";
 import "./Events.scss";
+import { HiMapPin } from "react-icons/hi2";
+import { BsCalendarWeek } from "react-icons/bs";
 import Slider from "react-slick";
 const dummyEvents = [
   {
@@ -11,16 +13,10 @@ const dummyEvents = [
       "The Tech Summit is a two-day event that brings together the brightest minds in technology to discuss the latest trends and innovations in the industry.",
     attendees: [
       {
-        name: "Sarah Lee",
-        email: "sarahlee@example.com",
-      },
-      {
-        name: "David Kim",
-        email: "davidkim@example.com",
-      },
-      {
-        name: "Michael Chen",
-        email: "michaelchen@example.com",
+        name: "Shima Loren",
+        email: "Shima@example.com",
+        photo:
+          "https://images.pexels.com/photos/8199174/pexels-photo-8199174.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -35,10 +31,8 @@ const dummyEvents = [
       {
         name: "David Johnson",
         email: "davidjohnson@example.com",
-      },
-      {
-        name: "Sarah Thompson",
-        email: "sarahthompson@example.com",
+        photo:
+          "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -53,10 +47,8 @@ const dummyEvents = [
       {
         name: "Michael Williams",
         email: "michaelwilliams@example.com",
-      },
-      {
-        name: "Emily Davis",
-        email: "emilydavis@example.com",
+        photo:
+          "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -69,12 +61,10 @@ const dummyEvents = [
       "Join us for our annual conference featuring industry experts and networking opportunities.",
     attendees: [
       {
-        name: "John Doe",
-        email: "johndoe@example.com",
-      },
-      {
-        name: "Jane Smith",
-        email: "janesmith@example.com",
+        name: "Amir Wloa",
+        email: "jsas@example.com",
+        photo:
+          "https://images.pexels.com/photos/1546912/pexels-photo-1546912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -87,16 +77,10 @@ const dummyEvents = [
       "Watch as some of the most promising startups pitch their ideas to a panel of judges for a chance to win funding and support.",
     attendees: [
       {
-        name: "Alex Lee",
-        email: "alexlee@example.com",
-      },
-      {
-        name: "Jessica Kim",
-        email: "jessicakim@example.com",
-      },
-      {
-        name: "Brian Park",
-        email: "brianpark@example.com",
+        name: "Alex Sirea",
+        email: "alexs@example.com",
+        photo:
+          "https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -109,16 +93,10 @@ const dummyEvents = [
       "Come see some of the most beautiful and thought-provoking works of art from around the world at our annual art exhibition.",
     attendees: [
       {
-        name: "Daniel Lee",
-        email: "daniellee@example.com",
-      },
-      {
-        name: "Grace Kim",
-        email: "gracekim@example.com",
-      },
-      {
-        name: "Kevin Park",
-        email: "kevinpark@example.com",
+        name: "joen Lee",
+        email: "janiesaa@example.com",
+        photo:
+          "https://images.pexels.com/photos/2537658/pexels-photo-2537658.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
       },
     ],
   },
@@ -130,8 +108,9 @@ const Events = () => {
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
+    arrows:false,
     autoplay: true,
-    autoplaySpeed: 2000,
+    autoplaySpeed: 5000,
     pauseOnHover: true,
   };
   return (
@@ -140,16 +119,25 @@ const Events = () => {
         {dummyEvents.map((event) => (
           <Col md={23} key={event.id} className="event-card">
             <h3 className="event-title">{event.title}</h3>
-            <p className="event-date">{event.date}</p>
-            <p className="event-location">{event.location}</p>
+            <p className="event-date">
+              <BsCalendarWeek />
+              {event.date}
+            </p>
+            <p className="event-location">
+              <HiMapPin />
+              {event.location}
+            </p>
             <div className="event-description-wrapper">
               <p className="event-description">{event.description}</p>
             </div>
             <div className="event-attendees">
               {event.attendees.map((attendee, index) => (
-                <span key={index} className="attendee" title={attendee.email}>
-                  {attendee.name}
-                </span>
+                <div key={index} className="attendee">
+                  <img src={attendee.photo} alt="profile" className="attendeeImg" />
+                  <span className="attendeeName" title={attendee.email}>
+                    {attendee.name}
+                  </span>
+                </div>
               ))}
             </div>
           </Col>
