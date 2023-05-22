@@ -1,0 +1,67 @@
+.event-row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .event-card {
+    width: 300px;
+    padding: 16px;
+    margin: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+  }
+  
+  .event-title {
+    margin-top: 0;
+  }
+  
+  .event-date,
+  .event-location {
+    color: #888;
+    margin-bottom: 8px;
+  }
+  
+  .event-description {
+    margin-bottom: 16px;
+  }
+  
+  .event-attendees {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .attendee {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: default;
+  }
+  
+  .attendee:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .attendee::before {
+    content: attr(title);
+    position: absolute;
+    left: 50%;
+    top: -25px;
+    transform: translateX(-50%);
+    background-color: #000;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .attendee:hover::before {
+    opacity: 1;
+  }
+  
