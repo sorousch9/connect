@@ -4,7 +4,14 @@
   @include appTheme($themes) {
     background-color: themed("backgroundSoftColor");
     color: themed("textColor");
+    padding: 20px 70px;
     height: 100%;
   }
+  @include mobile {
+    padding: 10px;
+  }
 
+  @include tablet {
+    padding: 20px;
+  }
 }

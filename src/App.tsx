@@ -13,20 +13,24 @@ import Login from "./Pages/Login/Login";
 import Register from "./Pages/Register/Register";
 import { DarkModeContext } from "./context/themeContext";
 import { AuthContext } from "./context/authContext";
-
+import { Col, Row } from "antd";
 const AppLayout = () => {
   const { darkMode } = useContext(DarkModeContext);
 
   return (
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
       <Navbar />
-      <div style={{ display: "flex" }}>
-        <LeftBar />
-        <div style={{ flex: 8 }}>
+      <Row>
+        <Col md={3}>
+          <LeftBar />
+        </Col>
+        <Col md={16}>
           <Outlet />
-        </div>
-        <RightBar />
-      </div>
+        </Col>
+        <Col md={5}>
+          <RightBar />
+        </Col>
+      </Row>
     </div>
   );
 };
