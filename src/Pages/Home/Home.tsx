@@ -1,9 +1,10 @@
+import Events from "../../components/Events/Events";
 import "./Home.scss";
 
 const Home = () => {
   return (
     <div className="home">
-      <p>home</p>
+      <Events />
     </div>
   );
 };
