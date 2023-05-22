@@ -16,12 +16,13 @@
       padding: 20px;
 
       .item {
-        -webkit-box-shadow: themed("box-shadow");
-        -moz-box-shadow: themed("box-shadow");
-        box-shadow: themed("box-shadow");
+        -webkit-box-shadow: themed("boxShadow");
+        -moz-box-shadow: themed("boxShadow");
+        box-shadow: themed("boxShadow");
         padding: 20px;
         margin-bottom: 20px;
         background-color: themed("backgroundColor");
+        border-radius: 8px;
 
         span {
           color: gray;
@@ -41,7 +42,7 @@
             img {
               width: 40px;
               height: 40px;
-              border-radius: 20%;
+              border-radius: 10px;
               object-fit: cover;
             }
 
