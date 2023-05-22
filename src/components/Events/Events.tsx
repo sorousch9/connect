@@ -1,4 +1,6 @@
+import { Col } from "antd";
 import "./Events.scss";
+import Slider from "react-slick";
 const dummyEvents = [
   {
     id: 1,
@@ -123,23 +125,36 @@ const dummyEvents = [
 ];
 
 const Events = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true,
+  };
   return (
     <div className="event-row">
-      {dummyEvents.map((event) => (
-        <div key={event.id} className="event-card">
-          <h3 className="event-title">{event.title}</h3>
-          <p className="event-date">{event.date}</p>
-          <p className="event-location">{event.location}</p>
-          <p className="event-description">{event.description}</p>
-          <div className="event-attendees">
-            {event.attendees.map((attendee, index) => (
-              <span key={index} className="attendee" title={attendee.email}>
-                {attendee.name}
-              </span>
-            ))}
-          </div>
-        </div>
-      ))}
+      <Slider {...settings}>
+        {dummyEvents.map((event) => (
+          <Col md={23} key={event.id} className="event-card">
+            <h3 className="event-title">{event.title}</h3>
+            <p className="event-date">{event.date}</p>
+            <p className="event-location">{event.location}</p>
+            <div className="event-description-wrapper">
+              <p className="event-description">{event.description}</p>
+            </div>
+            <div className="event-attendees">
+              {event.attendees.map((attendee, index) => (
+                <span key={index} className="attendee" title={attendee.email}>
+                  {attendee.name}
+                </span>
+              ))}
+            </div>
+          </Col>
+        ))}
+      </Slider>
     </div>
   );
 };
