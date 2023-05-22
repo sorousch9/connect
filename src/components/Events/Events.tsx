@@ -16,7 +16,7 @@ const dummyEvents = [
         name: "Shima Loren",
         email: "Shima@example.com",
         photo:
-          "https://images.pexels.com/photos/8199174/pexels-photo-8199174.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/8199174/pexels-photo-8199174.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
@@ -32,7 +32,7 @@ const dummyEvents = [
         name: "David Johnson",
         email: "davidjohnson@example.com",
         photo:
-          "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
@@ -48,7 +48,7 @@ const dummyEvents = [
         name: "Michael Williams",
         email: "michaelwilliams@example.com",
         photo:
-          "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/428328/pexels-photo-428328.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
@@ -64,7 +64,7 @@ const dummyEvents = [
         name: "Amir Wloa",
         email: "jsas@example.com",
         photo:
-          "https://images.pexels.com/photos/1546912/pexels-photo-1546912.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/1546912/pexels-photo-1546912.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
@@ -80,7 +80,7 @@ const dummyEvents = [
         name: "Alex Sirea",
         email: "alexs@example.com",
         photo:
-          "https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
@@ -96,7 +96,7 @@ const dummyEvents = [
         name: "joen Lee",
         email: "janiesaa@example.com",
         photo:
-          "https://images.pexels.com/photos/2537658/pexels-photo-2537658.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          "https://images.pexels.com/photos/2537658/pexels-photo-2537658.jpeg?auto=compress&cs=tinysrgb&w=400",
       },
     ],
   },
