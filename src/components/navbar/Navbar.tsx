@@ -5,7 +5,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoPersonOutline } from "react-icons/io5";
 import { IoSearchOutline } from "react-icons/io5";
-import LogoInWhite from "../../assets/Logo.png";
+import LogoInWhite from "../../assets/Logo.svg";
 import LogoInDark from "../../assets/LogoInDark.png";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";

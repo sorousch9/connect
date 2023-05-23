@@ -22,13 +22,13 @@ const AppLayout = () => {
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
       <Navbar />
       <Row className="app">
-        <Col md={3} className="left">
+        <Col xs={0} md={4} lg={4} className="left">
           <LeftBar />
         </Col>
-        <Col md={16} className="center">
+        <Col xs={24} md={20} lg={15} className="center">
           <Outlet />
         </Col>
-        <Col md={5} className="right">
+        <Col sm={0} md={0} lg={5} className="right">
           <RightBar />
         </Col>
       </Row>
@@ -38,7 +38,6 @@ const AppLayout = () => {
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
   if (!currentUser) {
     return <Navigate to="/login" />;
   }
