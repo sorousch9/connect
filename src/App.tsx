@@ -14,6 +14,7 @@ import Register from "./Pages/Register/Register";
 import { DarkModeContext } from "./context/themeContext";
 import { AuthContext } from "./context/authContext";
 import { Col, Row } from "antd";
+import Profile from "./Pages/Profile/Profile";
 const AppLayout = () => {
   const { darkMode } = useContext(DarkModeContext);
 
@@ -57,6 +58,10 @@ const routes = [
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/profile/:id",
+        element: <Profile />,
       },
     ],
   },
