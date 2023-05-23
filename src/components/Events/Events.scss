@@ -9,7 +9,7 @@
       -moz-box-shadow: themed("boxShadowLow");
       box-shadow: themed("boxShadowLow");
       border-radius: 8px;
-      background-color: themed("backgroundColor");
+      border: 1px solid themed("borderColor");
       .event-title {
         margin-top: 0;
       }

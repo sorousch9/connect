@@ -1,22 +1,19 @@
 @import "../../index.scss";
 .navbar {
   @include appTheme($themes) {
-    display: flex;
     color: themed("textColor");
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-bottom: 1px solid themed("borderColor");
     position: sticky;
     top: 0;
     background-color: themed("backgroundColor");
     z-index: 999;
-
+    @include tablet {
+      justify-content: space-around;
+    }
     .left {
       display: flex;
       align-items: center;
-      gap: 30px;
-
       img {
         height: 25px;
       }
@@ -25,7 +22,11 @@
       display: flex;
       align-items: center;
       gap: 20px;
-
+      justify-content: center;
+      @include tablet {
+        flex-direction: row-reverse;
+        order: 3;
+      }
       .search {
         display: flex;
         align-items: center;
@@ -42,20 +43,26 @@
           outline: none;
           color: themed(textColor);
           font-size: 1rem;
+          @include tablet {
+            width: 100%;
+          }
         }
       }
     }
     .right {
       display: flex;
       align-items: center;
+      justify-content: flex-end;
       gap: 20px;
-
+      @include tablet {
+        padding-top: 0.5rem;
+        order: 2;
+      }
       .user {
         display: flex;
         align-items: center;
         gap: 10px;
         font-weight: 500;
-
         img {
           width: 30px;
           height: 30px;

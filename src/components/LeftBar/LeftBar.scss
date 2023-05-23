@@ -1,7 +1,6 @@
 @import "../../index.scss";
 .leftBar {
   @include appTheme($themes) {
-    background-color: themed("backgroundColor");
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);

@@ -3,10 +3,10 @@
 .rightBar {
   @include appTheme($themes) {
     position: sticky;
-    top: 70px;
+    top: 65px;
+    bottom: 0px;
     height: calc(100vh - 70px);
     overflow: scroll;
-    background-color: themed("backgroundColor");
 
     &::-webkit-scrollbar {
       display: none;
