@@ -1,7 +1,12 @@
-.posts-container {
+@import "../../index.scss";
+
+.actions-container {
+  @include appTheme($themes) {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    h1 {
+      color: themed("textColor");
+    }
   }
-  
-  
+}

@@ -62,13 +62,11 @@ const lastActivies = [
 ];
 const LastActions = () => {
   return (
-    <div>
+    <div className="actions-container">
       <h1>Recent Activities</h1>
-      <div className="posts-container">
-        {lastActivies.map((post) => (
-          <Action post={post} />
-        ))}
-      </div>
+      {lastActivies.map((action) => (
+        <Action key={action.id} action={action} />
+      ))}
     </div>
   );
 };

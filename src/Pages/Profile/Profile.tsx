@@ -10,6 +10,7 @@ import {
 import { HiOutlineLanguage } from "react-icons/hi2";
 import { MdOutlinePlace } from "react-icons/md";
 import { FiMoreVertical } from "react-icons/fi";
+import LastActions from "../../components/LastActions/LastActions";
 const Profile = () => {
   return (
     <div className="profile">
@@ -45,8 +46,10 @@ const Profile = () => {
                 <SlSocialGithub fontSize="large" />
               </a>
             </div>
-            <span>detail 1</span>
-            <span>detail 2</span>
+            <div className="skill">
+              <span>Developer</span>
+              <span>IT department</span>
+            </div>
           </div>
 
           <div className="profileDetails">
@@ -67,6 +70,7 @@ const Profile = () => {
             <FiMoreVertical />
           </div>
         </div>
+        <LastActions />
       </div>
     </div>
   );

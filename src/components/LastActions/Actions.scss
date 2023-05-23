@@ -1,6 +1,6 @@
 @import "../../index.scss";
 
-.post {
+.action {
   @include appTheme($themes) {
     border: 1px solid themed("borderColor");
     -webkit-box-shadow: themed("boxShadowLow");
@@ -8,7 +8,9 @@
     box-shadow: themed("boxShadowLow");
     padding: 20px;
     border-radius: 8px;
-    .post-header {
+    color: themed("textColor");
+    ;
+    .action-header {
       display: flex;
       align-items: center;
       gap: 10px;
@@ -29,11 +31,11 @@
         font-size: 14px;
       }
     }
-    .post-title {
+    .action-title {
       margin-top: 10px;
     }
 
-    .post-content {
+    .action-content {
       margin-top: 5px;
     }
     .info {

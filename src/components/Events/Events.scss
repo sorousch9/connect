@@ -10,6 +10,12 @@
       box-shadow: themed("boxShadowLow");
       border-radius: 8px;
       border: 1px solid themed("borderColor");
+      @include mobile {
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border: none;
+      }
       .event-title {
         margin-top: 0;
       }

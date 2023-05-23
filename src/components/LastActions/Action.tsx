@@ -6,7 +6,7 @@ import { MdOutlineTextsms } from "react-icons/md";
 import { FC } from "react";
 import Comments from "../Comments/Comments";
 type Props = {
-  post: {
+  action: {
     id: number;
     author: {
       name: string;
@@ -17,23 +17,23 @@ type Props = {
     content: string;
   };
 };
-const Action: FC<Props> = ({ post }) => {
+const Action: FC<Props> = ({ action }) => {
   const [commentOpen, setCommentOpen] = useState(false);
 
   return (
     <div>
-      <div key={post.id} className="post">
-        <div className="post-header">
+      <div key={action.id} className="action">
+        <div className="action-header">
           <img
-            src={post.author.photo}
+            src={action.author.photo}
             alt="Profile"
             className="profile-picture"
           />
-          <div className="author-name">{post.author.name}</div>
-          <div className="timestamp">{post.timestamp}</div>
+          <div className="author-name">{action.author.name}</div>
+          <div className="timestamp">{action.timestamp}</div>
         </div>
-        <h2 className="post-title">{post.title}</h2>
-        <p className="post-content">{post.content}</p>
+        <h2 className="action-title">{action.title}</h2>
+        <p className="action-content">{action.content}</p>
         <div className="info">
           <div className="item">
             <AiFillHeart />
