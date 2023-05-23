@@ -20,14 +20,14 @@ const AppLayout = () => {
   return (
     <div className={`theme-${darkMode ? "dark" : "light"}`}>
       <Navbar />
-      <Row>
-        <Col md={3}>
+      <Row className="app">
+        <Col md={3} className="left">
           <LeftBar />
         </Col>
-        <Col md={16}>
+        <Col md={16} className="center">
           <Outlet />
         </Col>
-        <Col md={5}>
+        <Col md={5} className="right">
           <RightBar />
         </Col>
       </Row>
