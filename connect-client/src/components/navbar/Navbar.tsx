@@ -45,7 +45,7 @@ const Navbar = () => {
         <AiOutlineMail size={"1.5rem"} />
         <IoIosNotificationsOutline size={"1.6rem"} />
         <div className="user">
-          <img src={currentUser?.profilePic} alt="" />
+          <img src={currentUser?.profilePhoto} alt="" />
           <span>{currentUser?.name}</span>
         </div>
       </Col>
