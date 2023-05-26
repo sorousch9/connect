@@ -1,16 +1,20 @@
+import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 
-// Define the User type
 interface User {
   id: number;
   name: string;
   profilePic: string;
 }
 
-// Define the AuthContextType
 interface AuthContextType {
   currentUser: User | null;
-  login: () => void;
+  login: (inputs: LoginInputs) => void;
+}
+
+interface LoginInputs {
+  username: string;
+  password: string;
 }
 
 export const AuthContext = createContext<AuthContextType>(
@@ -20,23 +24,24 @@ export const AuthContext = createContext<AuthContextType>(
 export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // Retrieve the user from local storage, or provide a default value
   const storedUser = localStorage.getItem("user");
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
   const [currentUser, setCurrentUser] = useState<User>(parsedUser);
 
-  const login = () => {
-    setCurrentUser({
-      id: 1,
-      name: "Patrick Müller",
-      profilePic:
-        "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    });
+  const login = async (inputs: LoginInputs) => {
+    const res = await axios.post(
+      "http://localhost:8800/api/auth/login",
+      inputs,
+      {
+        withCredentials: true,
+      }
+    );
+
+    setCurrentUser(res.data);
   };
+
   useEffect(() => {
-    if (currentUser) {
-      localStorage.setItem("user", JSON.stringify(currentUser));
-    }
+    localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
   return (
