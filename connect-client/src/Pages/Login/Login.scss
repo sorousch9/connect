@@ -1,10 +1,14 @@
+@import "../../index.scss";
+
 .login {
   height: 100vh;
   background-color: rgb(205, 205, 205);
   display: flex;
   align-items: center;
   justify-content: center;
-
+  @include mobile {
+    display: contents;
+  }
   .card {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     display: flex;
@@ -12,7 +16,10 @@
     border-radius: 10px;
     min-height: 600px;
     overflow: hidden;
-
+    @include mobile {
+      flex-direction: column;
+      border-radius: 0px;
+    }
     .left {
       flex: 1;
       background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(96, 24, 11, 0.5)),
@@ -26,15 +33,23 @@
       color: white;
 
       h1 {
-        font-size: 100px;
-        line-height: 100px;
+        font-size: 5rem;
+        line-height: 6rem;
         margin-bottom: 20px;
+        @include mobile {
+          font-size: 2rem;
+          line-height: 2rem;
+          margin-bottom: 0px;
+        }
       }
 
       p {
         font-size: 18px;
         line-height: 30px;
         margin-bottom: 30px;
+        @include mobile {
+          display: none;
+        }
       }
 
       span {
@@ -52,7 +67,6 @@
         font-weight: bold;
         cursor: pointer;
         border-radius: 4px;
-
       }
     }
 
@@ -67,13 +81,18 @@
       h1 {
         color: #555;
         margin-bottom: 20px;
+        @include mobile {
+          margin-bottom: 5px;
+        }
       }
 
       form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-
+        @include mobile {
+          gap: 30px;
+        }
         input {
           border: none;
           border-bottom: 1px solid lightgray;
@@ -91,21 +110,6 @@
           font-weight: bold;
           cursor: pointer;
           border-radius: 4px;
-        }
-
-        .forgot-password {
-          text-align: center;
-          font-size: 14px;
-        }
-
-        .forgot-password a {
-          color: #555;
-          text-decoration: none;
-          transition: color 0.3s ease;
-        }
-
-        .forgot-password a:hover {
-          color: #a8ef8e;
         }
       }
     }
