@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import RightBar from "./components/rightBar/RightBar";
-import LeftBar from "./components/LeftBar/LeftBar";
+import LeftBar from "./components/leftBar/LeftBar";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
@@ -15,24 +15,27 @@ import { DarkModeContext } from "./context/themeContext";
 import { AuthContext } from "./context/authContext";
 import { Col, Row } from "antd";
 import Profile from "./Pages/Profile/Profile";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 const AppLayout = () => {
+  const queryClient = new QueryClient();
   const { darkMode } = useContext(DarkModeContext);
-
   return (
-    <div className={`theme-${darkMode ? "dark" : "light"}`}>
-      <Navbar />
-      <Row className="app">
-        <Col xs={0} md={4} lg={4} className="left">
-          <LeftBar />
-        </Col>
-        <Col xs={24} md={20} lg={15} className="center">
-          <Outlet />
-        </Col>
-        <Col sm={0} md={0} lg={5} className="right">
-          <RightBar />
-        </Col>
-      </Row>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
+        <Navbar />
+        <Row className="app">
+          <Col xs={0} md={4} lg={4} className="left">
+            <LeftBar />
+          </Col>
+          <Col xs={24} md={20} lg={15} className="center">
+            <Outlet />
+          </Col>
+          <Col sm={0} md={0} lg={5} className="right">
+            <RightBar />
+          </Col>
+        </Row>
+      </div>
+    </QueryClientProvider>
   );
 };
 
