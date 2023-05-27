@@ -4,7 +4,7 @@ import { createContext, useEffect, useState } from "react";
 interface User {
   id: number;
   name: string;
-  profilePic: string;
+  profilePhoto: string;
 }
 
 interface AuthContextType {
@@ -27,7 +27,6 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const storedUser = localStorage.getItem("user");
   const parsedUser = storedUser ? JSON.parse(storedUser) : null;
   const [currentUser, setCurrentUser] = useState<User>(parsedUser);
-
   const login = async (inputs: LoginInputs) => {
     const res = await axios.post(
       "http://localhost:8800/api/auth/login",
