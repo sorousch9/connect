@@ -1,44 +1,79 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./Comments.scss";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import moment from "moment";
+import { axiosRequest } from "../../hooks/axios";
 import { AuthContext } from "../../context/authContext";
 
-const Comments = () => {
+interface Comment {
+  description: string;
+  actionId: number;
+  createdAt?: string;
+}
+
+interface QueryData {
+  data: Comment[];
+  map: (callback: (comment: Comment) => any) => any[];
+}
+
+const Comments: React.FC<{ actionId: number }> = ({ actionId }) => {
+  const [description, setDescription] = useState("");
   const { currentUser } = useContext(AuthContext);
-  const comments = [
-    {
-      id: 1,
-      desc: "I really enjoyed reading this comment. The author expressed their thoughts eloquently and captured my attention. The content was engaging and thought-provoking. I appreciate the effort put into writing such a great comment. Well done!",
-      name: "John Smith",
-      userId: 1,
-      profilePicture:
-        "https://images.pexels.com/photos/804009/pexels-photo-804009.jpeg?auto=compress&cs=tinysrgb&w=400",
+
+  const { isLoading, error, data } = useQuery<QueryData>(["comments"], () =>
+    axiosRequest.get("/comments?actionId=" + actionId).then((res) => {
+      return res.data;
+    })
+  );
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (newComment: Comment) => {
+      return axiosRequest.post("/comments", newComment);
     },
     {
-      id: 2,
-      desc: "This comment is concise yet impactful. It conveys a clear message and leaves room for interpretation. The author did a fantastic job of expressing their thoughts in a concise manner. Great work!",
-      name: "Sophia Wilson",
-      userId: 2,
-      profilePicture:
-        "https://images.pexels.com/photos/1820559/pexels-photo-1820559.jpeg?auto=compress&cs=tinysrgb&w=400",
-    },
-  ];
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["comments"]);
+      },
+    }
+  );
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    mutation.mutate({ description, actionId });
+    setDescription("");
+  };
+
   return (
     <div className="comments">
       <div className="write">
-        <img src={currentUser?.profilePic} alt="" />
-        <input type="text" placeholder="write a comment" />
-        <button>Send</button>
+        <img src={currentUser?.profilePhoto} alt="" />
+        <input
+          type="text"
+          placeholder="write a comment"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <button onClick={handleClick}>Send</button>
       </div>
-      {comments.map((comment) => (
-        <div className="comment">
-          <img src={comment.profilePicture} alt="" />
-          <div className="info">
-            <span>{comment.name}</span>
-            <p>{comment.desc}</p>
-          </div>
-          <span className="date">1 hour ago</span>
-        </div>
-      ))}
+      {error
+        ? "Something went wrong"
+        : isLoading
+        ? "loading"
+        : data?.map((comment) => (
+            <div className="comment" key={comment.createdAt}>
+              <img src="" alt="" />
+              <div className="info">
+                <span>commnet.name</span>
+                <p>{comment.description}</p>
+              </div>
+              <span className="date">
+                {moment(comment.createdAt).fromNow()}
+              </span>
+            </div>
+          ))}
     </div>
   );
 };
