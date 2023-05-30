@@ -1,0 +1,108 @@
+@import "../../index.scss";
+
+.share {
+  @include appTheme($themes) {
+    border: 1px solid themed("borderColor");
+    -webkit-box-shadow: themed("boxShadowLow");
+    -moz-box-shadow: themed("boxShadowLow");
+    box-shadow: themed("boxShadowLow");
+    border-radius: 20px;
+    background-color: themed("bg");
+    color: themed("textColor");
+    margin-bottom: 20px;
+    margin-top: 40px;
+
+    .container {
+      padding: 20px;
+      .top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        .inputs {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+          }
+          form {
+            display: flex;
+            flex-direction: column;
+
+            input {
+              width: 70%;
+
+              border: none;
+              outline: none;
+              padding: 10px 10px;
+              background-color: transparent;
+              color: themed("textColor");
+              &::placeholder {
+                color: themed("borderColor");
+              }
+            }
+          }
+        }
+        .other-insert {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    hr {
+      margin: 20px 0px;
+      border: none;
+      height: 0.5px;
+      background-color: themed("borderColor");
+    }
+
+    .bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        .item {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          cursor: pointer;
+
+          svg {
+            font-size: 1.5rem;
+          }
+
+          span {
+            font-size: 12px;
+            color: gray;
+          }
+        }
+      }
+      .right {
+        button {
+          border: none;
+          padding: 8px 20px;
+          color: white;
+          cursor: pointer;
+          background-color: themed("borderColor");
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
