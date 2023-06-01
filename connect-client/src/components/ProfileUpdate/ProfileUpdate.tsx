@@ -31,6 +31,49 @@ const Update: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
     profilePhoto: user.profilePhoto,
   });
 
+  const upload = async (file: File) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await axiosRequest.post("/upload", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTexts((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (user: User) => {
+      return axiosRequest.put("/users", user);
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["user"]);
+      },
+    }
+  );
+
+  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    let coverUrl;
+    let profileUrl;
+    coverUrl = cover ? await upload(cover) : user.coverPic;
+    profileUrl = profile ? await upload(profile) : user.profilePhoto;
+
+    mutation.mutate({ ...texts, coverPic: coverUrl, profilePhoto: profileUrl });
+    setOpenUpdate(false);
+    setCover(null);
+    setProfile(null);
+  };
+
   return (
     <div className="update">
       <div className="wrapper">
@@ -79,16 +122,41 @@ const Update: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
             />
           </div>
           <label>Email</label>
-          <input type="text" value={texts.email} name="email" />
+          <input
+            type="text"
+            value={texts.email}
+            name="email"
+            onChange={handleChange}
+          />
           <label>Password</label>
-          <input type="text" value={texts.password} name="password" />
+          <input
+            type="text"
+            value={texts.password}
+            name="password"
+            onChange={handleChange}
+          />
           <label>Name</label>
-          <input type="text" value={texts.name} name="name" />
+          <input
+            type="text"
+            value={texts.name}
+            name="name"
+            onChange={handleChange}
+          />
           <label>Country / City</label>
-          <input type="text" name="city" value={texts.city} />
+          <input
+            type="text"
+            name="city"
+            value={texts.city}
+            onChange={handleChange}
+          />
           <label>Website</label>
-          <input type="text" name="website" value={texts.website} />
-          <button>Update</button>
+          <input
+            type="text"
+            name="website"
+            value={texts.website}
+            onChange={handleChange}
+          />
+          <button onClick={handleClick}>Update</button>
         </form>
         <button className="close" onClick={() => setOpenUpdate(false)}>
           close
