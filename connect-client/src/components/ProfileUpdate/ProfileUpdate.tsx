@@ -31,8 +31,6 @@ const Update: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
     profilePhoto: user.profilePhoto,
   });
 
-  
-
   return (
     <div className="update">
       <div className="wrapper">
@@ -80,7 +78,18 @@ const Update: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
               onChange={(e) => setProfile(e.target.files?.[0] || null)}
             />
           </div>
-         
+          <label>Email</label>
+          <input type="text" value={texts.email} name="email" />
+          <label>Password</label>
+          <input type="text" value={texts.password} name="password" />
+          <label>Name</label>
+          <input type="text" value={texts.name} name="name" />
+          <label>Country / City</label>
+          <input type="text" name="city" value={texts.city} />
+          <label>Website</label>
+          <input type="text" name="website" value={texts.website} />
+          <button>Update</button>
+        </form>
         <button className="close" onClick={() => setOpenUpdate(false)}>
           close
         </button>
