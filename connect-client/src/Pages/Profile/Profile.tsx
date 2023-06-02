@@ -11,7 +11,57 @@ import { HiOutlineLanguage } from "react-icons/hi2";
 import { MdOutlinePlace } from "react-icons/md";
 import { FiMoreVertical } from "react-icons/fi";
 import LastActions from "../../components/LastActions/LastActions";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/authContext";
+import { useLocation } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { axiosRequest } from "../../hooks/axios";
+import UserUpdate from "../../components/userUpdate/UserUpdate";
+
 const Profile = () => {
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+
+  const userId = parseInt(useLocation().pathname.split("/")[2]);
+
+  const { isLoading, error, data } = useQuery(["user"], () =>
+    axiosRequest.get("/users/find/" + userId).then((res) => {
+      return res.data;
+    })
+  );
+
+  const { isLoading: rIsLoading, data: relationshipData } = useQuery(
+    ["relationship"],
+    () =>
+      axiosRequest
+        .get("/relationships?followedUserId=" + userId)
+        .then((res) => {
+          return res.data;
+        })
+  );
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (following: boolean) => {
+      if (following) {
+        return axiosRequest.delete("/relationships?userId=" + userId);
+      } else {
+        return axiosRequest.post("/relationships", { userId });
+      }
+    },
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        queryClient.invalidateQueries(["relationship"]);
+      },
+    }
+  );
+
+  const handleFollow = () => {
+    const following = relationshipData.includes(currentUser?.id);
+    mutation.mutate(following);
+  };
   return (
     <div className="profile">
       <div className="images">
@@ -69,9 +119,25 @@ const Profile = () => {
             <SlEnvolopeLetter />
             <FiMoreVertical />
           </div>
+          <div>
+            {rIsLoading ? (
+              "loading"
+            ) : userId === currentUser?.id ? (
+              <button onClick={() => setOpenUpdate(true)}>update</button>
+            ) : (
+              <button onClick={handleFollow}>
+                {relationshipData.includes(currentUser?.id)
+                  ? "Following"
+                  : "Follow"}
+              </button>
+            )}
+          </div>
         </div>
         <LastActions />
       </div>
+
+      <div className="right"></div>
+      {openUpdate && <UserUpdate setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   );
 };
