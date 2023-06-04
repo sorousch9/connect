@@ -24,7 +24,7 @@ const Profile = () => {
 
   const userId = parseInt(useLocation().pathname.split("/")[2]);
 
-  const { isLoading, error, data } = useQuery(["user"], () =>
+  const { data } = useQuery(["user"], () =>
     axiosRequest.get("/users/find/" + userId).then((res) => {
       return res.data;
     })
@@ -65,23 +65,18 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="images">
-        <img
-          src="https://images.pexels.com/photos/1271619/pexels-photo-1271619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt=""
-          className="coverPhoto"
-        />
-        <img
-          src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt=""
-          className="profilePic"
-        />
+        <img src={currentUser?.coverPic} alt="" className="coverPhoto" />
+        <img src={currentUser?.profilePhoto} alt="" className="profilePic" />
       </div>
       <div className="profileContainer">
         <div className="Detail">
           <div className="leftside">
             <div className="social">
-              <a href="http://facebook.com">
+              <a href={`http://facebook.com/${currentUser?.facebook}`}>
                 <SlSocialFacebook fontSize="large" />
+              </a>
+              <a href={`http://github.com/${currentUser?.github}`}>
+                <SlSocialGithub fontSize="large" />
               </a>
               <a href="http://instagram.com">
                 <SlSocialInstagram fontSize="large" />
@@ -92,51 +87,48 @@ const Profile = () => {
               <a href="http://twitter.com">
                 <SlSocialTwitter fontSize="large" />
               </a>
-              <a href="http://github.com">
-                <SlSocialGithub fontSize="large" />
-              </a>
             </div>
             <div className="skill">
-              <span>Developer</span>
-              <span>IT department</span>
+              <span>{currentUser?.title}</span>
+              <span>{currentUser?.branch}</span>
             </div>
           </div>
 
           <div className="profileDetails">
-            <span>Patrick Müller</span>
+            <span>{currentUser?.name}</span>
             <div className="info">
               <div className="item">
                 <MdOutlinePlace />
-                <span>Germany</span>
+                <span>{currentUser?.country}</span>
               </div>
               <div className="item">
                 <HiOutlineLanguage />
-                <span>Deutsch</span>,<span>Englisch</span>
+                <span>{currentUser?.language}</span>
               </div>
             </div>
+            <div className="updateProfile">
+              {rIsLoading ? (
+                "loading"
+              ) : userId === currentUser?.id ? (
+                <button onClick={() => setOpenUpdate(true)}>Update profile</button>
+              ) : (
+                <button onClick={handleFollow}>
+                  {relationshipData.includes(currentUser?.id)
+                    ? "Following"
+                    : "Follow"}
+                </button>
+              )}
+            </div>
           </div>
+
           <div className="moreDetail">
             <SlEnvolopeLetter />
             <FiMoreVertical />
-          </div>
-          <div>
-            {rIsLoading ? (
-              "loading"
-            ) : userId === currentUser?.id ? (
-              <button onClick={() => setOpenUpdate(true)}>update</button>
-            ) : (
-              <button onClick={handleFollow}>
-                {relationshipData.includes(currentUser?.id)
-                  ? "Following"
-                  : "Follow"}
-              </button>
-            )}
           </div>
         </div>
         <LastActions />
       </div>
 
-      <div className="right"></div>
       {openUpdate && <UserUpdate setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   );

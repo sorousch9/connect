@@ -84,7 +84,7 @@
           gap: 10px;
 
           span {
-            font-size: 30px;
+            font-size: 25px;
             font-weight: 500;
           }
 
@@ -107,7 +107,7 @@
           }
           button {
             border: none;
-            background-color: #4b68ec;
+            background-color: themed("backgroundbutton");
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
@@ -121,6 +121,11 @@
           align-items: center;
           justify-content: flex-end;
           gap: 10px;
+        }
+        .updateProfile {
+          button {
+            min-width: 150px;
+          }
         }
       }
     }
