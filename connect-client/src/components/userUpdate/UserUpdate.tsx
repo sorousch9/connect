@@ -3,12 +3,22 @@ import "./UserUpdate.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import { axiosRequest } from "../../hooks/axios";
+import { Form, Input, Button, Upload, message } from "antd";
+import { UploadOutlined } from "@ant-design/icons";
+
+const { Item } = Form;
+
 interface User {
   email: string;
   password: string;
   name: string;
-  city: string;
+  country: string;
+  language: string;
   website: string;
+  facebook: string;
+  github: string;
+  branch: string;
+  title: string;
   coverPic: string;
   profilePhoto: string;
 }
@@ -21,15 +31,7 @@ interface UpdateProps {
 const UserUpdate: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
   const [cover, setCover] = useState<File | null>(null);
   const [profile, setProfile] = useState<File | null>(null);
-  const [texts, setTexts] = useState<User>({
-    email: user.email,
-    password: user.password,
-    name: user.name,
-    city: user.city,
-    website: user.website,
-    coverPic: user.coverPic,
-    profilePhoto: user.profilePhoto,
-  });
+  const [form] = Form.useForm();
 
   const upload = async (file: File) => {
     try {
@@ -40,10 +42,6 @@ const UserUpdate: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
     } catch (err) {
       console.log(err);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTexts((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const queryClient = useQueryClient();
@@ -60,107 +58,147 @@ const UserUpdate: React.FC<UpdateProps> = ({ setOpenUpdate, user }) => {
     }
   );
 
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async (values: User) => {
     let coverUrl;
     let profileUrl;
     coverUrl = cover ? await upload(cover) : user.coverPic;
     profileUrl = profile ? await upload(profile) : user.profilePhoto;
 
-    mutation.mutate({ ...texts, coverPic: coverUrl, profilePhoto: profileUrl });
+    mutation.mutate({
+      ...values,
+      coverPic: coverUrl,
+      profilePhoto: profileUrl,
+    });
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
+  };
+
+  const handleCoverChange = (info: any) => {
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      setCover(info.file.originFileObj);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  };
+
+  const handleProfileChange = (info: any) => {
+    if (info.file.status === "done") {
+      message.success(`${info.file.name} file uploaded successfully`);
+      setProfile(info.file.originFileObj);
+    } else if (info.file.status === "error") {
+      message.error(`${info.file.name} file upload failed.`);
+    }
   };
 
   return (
     <div className="update">
       <div className="wrapper">
         <h1>Update Your Profile</h1>
-        <form>
+        <Form
+          form={form}
+          onFinish={handleSubmit}
+          initialValues={{
+            email: user.email,
+            password: user.password,
+            name: user.name,
+            country: user.country,
+            website: user.website,
+            facebook: user.facebook,
+            github: user.github,
+            branch: user.branch,
+            title: user.title,
+            language: user.language,
+            coverPic: user.coverPic,
+            profilePhoto: user.profilePhoto,
+          }}
+        >
           <div className="files">
-            <label htmlFor="cover">
-              <span>Cover Picture</span>
-              <div className="imgContainer">
-                <img
-                  src={
-                    cover
-                      ? URL.createObjectURL(cover)
-                      : "/upload/" + user.coverPic
-                  }
-                  alt=""
-                />
-                <AiOutlineCloudUpload className="icon" />
-              </div>
-            </label>
-            <input
-              type="file"
-              id="cover"
-              style={{ display: "none" }}
-              onChange={(e) => setCover(e.target.files?.[0] || null)}
-            />
-            <label htmlFor="profile">
-              <span>Profile Picture</span>
-              <div className="imgContainer">
-                <img
-                  src={
-                    profile
-                      ? URL.createObjectURL(profile)
-                      : "/upload/" + user.profilePhoto
-                  }
-                  alt=""
-                />
-                <AiOutlineCloudUpload className="icon" />
-              </div>
-            </label>
-            <input
-              type="file"
-              id="profile"
-              style={{ display: "none" }}
-              onChange={(e) => setProfile(e.target.files?.[0] || null)}
-            />
+            <Item label="Cover Picture">
+              <Upload
+                onChange={handleCoverChange}
+                maxCount={1}
+                listType="picture-card"
+                beforeUpload={() => false}
+                className="imgContainer"
+              >
+                {cover ? (
+                  <img
+                    src={URL.createObjectURL(cover)}
+                    alt=""
+                    style={{ width: "100%" }}
+                  />
+                ) : (
+                  <>
+                    <UploadOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </>
+                )}
+              </Upload>
+            </Item>
+            <Item label="Profile Picture">
+              <Upload
+                onChange={handleProfileChange}
+                maxCount={1}
+                listType="picture-card"
+                beforeUpload={() => false}
+                className="imgContainer"
+              >
+                {profile ? (
+                  <img
+                    src={URL.createObjectURL(profile)}
+                    alt=""
+                    style={{ width: "100%" }}
+                  />
+                ) : (
+                  <>
+                    <UploadOutlined />
+                    <div style={{ marginTop: 8 }}>Upload</div>
+                  </>
+                )}
+              </Upload>
+            </Item>
           </div>
-          <label>Email</label>
-          <input
-            type="text"
-            value={texts.email}
-            name="email"
-            onChange={handleChange}
-          />
-          <label>Password</label>
-          <input
-            type="text"
-            value={texts.password}
-            name="password"
-            onChange={handleChange}
-          />
-          <label>Name</label>
-          <input
-            type="text"
-            value={texts.name}
-            name="name"
-            onChange={handleChange}
-          />
-          <label>Country / City</label>
-          <input
-            type="text"
-            name="city"
-            value={texts.city}
-            onChange={handleChange}
-          />
-          <label>Website</label>
-          <input
-            type="text"
-            name="website"
-            value={texts.website}
-            onChange={handleChange}
-          />
-          <button onClick={handleClick}>Update</button>
-        </form>
-        <button className="close" onClick={() => setOpenUpdate(false)}>
-          close
-        </button>
+          <div className="inputs">
+            <Item label="Email" name="email">
+              <Input />
+            </Item>
+            <Item label="Password" name="password">
+              <Input.Password />
+            </Item>
+            <Item label="Name" name="name">
+              <Input />
+            </Item>
+            <Item label="Country" name="country">
+              <Input />
+            </Item>
+            <Item label="Website" name="website">
+              <Input />
+            </Item>
+            <Item label="Language" name="language">
+              <Input />
+            </Item>
+            <Item label="Facebook" name="facebook">
+              <Input />
+            </Item>
+            <Item label="Github" name="github">
+              <Input />
+            </Item>
+            <Item label="Rolle" name="branch">
+              <Input />
+            </Item>
+            <Item label="Title" name="title">
+              <Input />
+            </Item>
+          </div>
+        </Form>
+        <Button type="primary" htmlType="submit">
+          Update
+        </Button>
+        <Button className="close" onClick={() => setOpenUpdate(false)}>
+          Close
+        </Button>
       </div>
     </div>
   );
