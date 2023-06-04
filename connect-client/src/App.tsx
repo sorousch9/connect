@@ -7,7 +7,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import RightBar from "./components/rightBar/RightBar";
-import LeftBar from "./components/leftBar/LeftBar";
+import LeftBar from "./components/LeftBar/LeftBar";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./Pages/Home/Home";
 import Login from "./Pages/Login/Login";
