@@ -3,7 +3,17 @@ import { createContext, useEffect, useState } from "react";
 
 interface User {
   id: number;
+  email: string;
+  password: string;
   name: string;
+  country: string;
+  language: string;
+  website: string;
+  facebook: string;
+  github: string;
+  branch: string;
+  title: string;
+  coverPic: string;
   profilePhoto: string;
 }
 
