@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import "./app.scss";
 import {
   createBrowserRouter,
   RouterProvider,

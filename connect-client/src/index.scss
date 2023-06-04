@@ -21,6 +21,7 @@ $themes: (
     borderColor: #cbcbcb,
     boxShadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.09),
     boxShadowLow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px,
+    backgroundbutton: #4b68ec,
   ),
   dark: (
     textColor: #f5f5f5,
@@ -30,6 +31,7 @@ $themes: (
     borderColor: #444444,
     boxShadow: 0px 0px 12px 1px rgba(255, 255, 255, 0.227),
     boxShadowLow: rgba(189, 189, 189, 0.2) 0px 0px 6px 0px,
+    backgroundbutton: #818181,
   ),
 );
 
@@ -66,12 +68,4 @@ $themes: (
     @content;
   }
 }
-.app {
-  @include appTheme($themes) {
-    .left,
-    .center,
-    .right {
-      background-color: themed("backgroundColor");
-    }
-  }
-}
+

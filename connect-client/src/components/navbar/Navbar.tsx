@@ -44,10 +44,10 @@ const Navbar = () => {
         <IoPersonOutline size={"1.5rem"} />
         <AiOutlineMail size={"1.5rem"} />
         <IoIosNotificationsOutline size={"1.6rem"} />
-        <div className="user">
+        <Link to={`/profile/${currentUser?.id}`} className="user">
           <img src={currentUser?.profilePhoto} alt="" />
           <span>{currentUser?.name}</span>
-        </div>
+        </Link>
       </Col>
     </Row>
   );

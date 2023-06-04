@@ -1,0 +1,10 @@
+@import "./index.scss";
+.app {
+  @include appTheme($themes) {
+    .left,
+    .center,
+    .right {
+      background-color: themed("backgroundColor");
+    }
+  }
+}
