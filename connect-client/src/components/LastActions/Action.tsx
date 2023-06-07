@@ -11,6 +11,7 @@ import { axiosRequest } from "../../hooks/axios";
 import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
 import { AuthContext } from "../../context/authContext";
 import moment from "moment";
+import { Link } from "react-router-dom";
 type Props = {
   action: ActionType;
 };
@@ -59,15 +60,20 @@ const Action: FC<Props> = ({ action }) => {
   };
 
   return (
-    <div key={action.id} className="action">
+    <div className="action">
       <div className="action-header">
         <img
-          src={currentUser?.profilePhoto}
+          src={action.profilePhoto}
           alt="Profile"
           className="profile-picture"
         />
-        <div className="author-name">{currentUser?.name}</div>
         <div className="timestamp">{moment(action.createdAt).fromNow()}</div>
+        <Link
+          to={`/profile/${action.userId}`}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <span className="name">{action.name}</span>
+        </Link>
 
         <AiOutlineMore onClick={() => setMenuOpen(!menuOpen)} />
         {menuOpen && action.userId === currentUser?.id && (
