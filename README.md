@@ -9,7 +9,7 @@ First, you need to install MySQL. Visit the following link to download MySQL:
 <a href="https://dev.mysql.com/downloads/mysql/">MySQL Downloads</a>
 
 2-Create a MySQL Schema
-Once MySQL is installed, create a new schema with the name "connect-app" in your MySQL database.
+Once MySQL is installed, create a new schema with the name "connect-app" in your MySQL database.and import all data from "connect-app-db" folder.
 
 3-Clone the Connect App Repository
 Clone the Connect App repository from GitHub using the following command:
@@ -81,3 +81,5 @@ Congratulations! You have successfully installed and started the Connect App.
 Each of these dependencies plays a crucial role in enabling the functionality and user experience of the Connect App. Please refer to their respective documentation for more information on how they are used within the project.
 
 Thank you for using the Connect App! If you have any further questions or need assistance, please don't hesitate to reach out. Happy connecting!
+
+![full Home Page](/144220.png?raw=true "full Home Page")
