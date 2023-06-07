@@ -5,7 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 
 export type ActionType = {
   id: number;
+  profilePhoto: string;
   title: string;
+  name: string;
   description: string;
   timestamp: string;
   userId: number;
@@ -18,6 +20,7 @@ const LastActions = ({ userId }: any) => {
       return res.data;
     })
   );
+
   return (
     <div className="actions-container">
       <h1>Recent Activities</h1>

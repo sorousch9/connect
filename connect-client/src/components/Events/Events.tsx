@@ -3,6 +3,8 @@ import "./Events.scss";
 import { HiMapPin } from "react-icons/hi2";
 import { BsCalendarWeek } from "react-icons/bs";
 import Slider from "react-slick";
+import { axiosRequest } from "../../hooks/axios";
+import { useQuery } from "@tanstack/react-query";
 const dummyEvents = [
   {
     id: 1,
@@ -103,6 +105,12 @@ const dummyEvents = [
 ];
 
 const Events = () => {
+  const { isLoading, error, data } = useQuery(["stories"], () =>
+    axiosRequest.get("/stories").then((res) => {
+      return res.data;
+    })
+  );
+  console.log(data);
   const settings = {
     dots: true,
     infinite: true,
